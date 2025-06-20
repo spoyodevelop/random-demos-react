@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import type { TooltipItem } from "chart.js";
 import { Pie, Line } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
@@ -56,14 +57,14 @@ const SuneungAnalysis: React.FC = () => {
           padding: 20,
           font: {
             size: 12,
-            weight: "500",
+            weight: "normal" as const,
           },
           color: "#e0e0e0",
         },
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"pie">) {
             const total = context.dataset.data.reduce(
               (a: number, b: number) => a + b,
               0
@@ -78,9 +79,10 @@ const SuneungAnalysis: React.FC = () => {
         color: "white",
         font: {
           size: 14,
-          weight: "bold",
+          weight: "bold" as const,
         },
-        formatter: function (value: number, context: any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        formatter: function (value: any, context: any) {
           const total = context.dataset.data.reduce(
             (a: number, b: number) => a + b,
             0
@@ -199,7 +201,7 @@ const SuneungAnalysis: React.FC = () => {
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"line">) {
             return `${context.dataset.label}: ${context.parsed.y}%`;
           },
         },
