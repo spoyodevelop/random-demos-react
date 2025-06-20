@@ -6,7 +6,7 @@ import UrandomViewer from "./components/UrandomViewer";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/random-demos-react">
       <div className="app">
         <nav className="navbar">
           <div className="navbar-content">
